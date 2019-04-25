@@ -12,3 +12,12 @@ The point of this repository is to demonstrate:
 2. how to wrap the `z5` C++ code (that is necessary to execute the `main.cpp` program) in a
    C header file
 3. how to build and run the `main.c` C file, using the C/C++ `z5` wrapper
+
+## Environment Setup
+
+To create the environment you need to build and run, you need to install the conda
+environment using the _export_ file `environment.txt`, as follows:
+
+```bash
+conda create --name cz5test --file environment.txt
+```
