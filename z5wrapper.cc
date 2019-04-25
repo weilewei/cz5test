@@ -3,6 +3,7 @@
 //
 #include <string>
 #include <vector>
+#include <iostream>
 #include "z5wrapper.h"
 
 namespace z5 {
