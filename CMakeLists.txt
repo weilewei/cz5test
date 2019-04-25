@@ -23,3 +23,4 @@ add_executable(test_cpp main.cpp)
 target_link_libraries(test_cpp LINK_PUBLIC Boost::filesystem)
 
 add_executable(test_c main.c z5wrapper.cc)
+target_link_libraries(test_c LINK_PUBLIC Boost::filesystem)
