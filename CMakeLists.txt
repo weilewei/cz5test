@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.9)
 project(cz5test C CXX)
 
 message(STATUS "Using C11")
@@ -17,10 +17,13 @@ if(DEFINED ENV{CONDA_PREFIX})
     list(APPEND CMAKE_PREFIX_PATH $ENV{CONDA_PREFIX})
 endif()
 
-find_package(Boost REQUIRED COMPONENTS filesystem)
+find_package(Boost REQUIRED COMPONENTS system filesystem)
 
+SET(TEST_LIBS
+    ${Boost_FILESYSTEM_LIBRARY}    
+    ${Boost_SYSTEM_LIBRARY})
 add_executable(test_cpp main.cpp)
-target_link_libraries(test_cpp LINK_PUBLIC Boost::filesystem)
+target_link_libraries(test_cpp LINK_PUBLIC ${TEST_LIBS})
 
 add_executable(test_c main.c z5wrapper.cc)
-target_link_libraries(test_c LINK_PUBLIC Boost::filesystem)
+target_link_libraries(test_c LINK_PUBLIC ${TEST_LIBS})

@@ -6,6 +6,15 @@
 
 #include <stddef.h>
 #ifdef __cplusplus
+#include "z5/multiarray/xtensor_access.hxx"
+    extern "C" {
+#endif
+         typedef struct xarray cxarray;
+#ifdef __cplusplus
+    }
+#endif
+
+#ifdef __cplusplus
 #include "z5/dataset_factory.hxx"
 #endif
 
@@ -18,7 +27,7 @@ namespace z5 {
 
         Dataset *z5CreateFloatDataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks);
 
-        int z5WriteFloatSubarray(void *ds, float *array, size_t *offset);
+        int z5WriteFloatSubarray(void *ds, float *array,size_t *shape, size_t *offset);
 
         int z5ReadFloatSubarray(void *ds, float *array, size_t *offset);
 
