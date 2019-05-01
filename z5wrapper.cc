@@ -17,7 +17,7 @@ namespace z5 {
         return createDataset(path_s, "float32", shape_v, chunks_v, asZarr).release();
     }
 
-    int z5WriteFloatSubarray(void *ds, float *array, unsigned int ndim, size_t *shape, size_t *offset) {
+    void z5WriteFloatSubarray(void *ds, float *array, unsigned int ndim, size_t *shape, size_t *offset) {
         size_t size = 1;
         std::vector<std::size_t> shape_v(shape,shape + ndim); 
         for (std::vector<size_t>::const_iterator i = shape_v.begin(); i != shape_v.end(); ++i)
@@ -29,7 +29,7 @@ namespace z5 {
         unq_ds.release();
     }
 
-    int z5ReadFloatSubarray(void *ds, float *array, unsigned int ndim, size_t *shape, size_t *offset) {
+    void z5ReadFloatSubarray(void *ds, float *array, unsigned int ndim, size_t *shape, size_t *offset) {
         using vec_type = std::vector<float>;
         size_t size = 1;
         std::vector<std::size_t> shape_v(shape,shape + ndim); 
@@ -42,7 +42,6 @@ namespace z5 {
         auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
         multiarray::readSubarray<float>(unq_ds,adp_array,offset_v.begin()); 
         unq_ds.release();
-
     }
 }
 
