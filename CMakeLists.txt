@@ -17,6 +17,13 @@ if(DEFINED ENV{CONDA_PREFIX})
     list(APPEND CMAKE_PREFIX_PATH $ENV{CONDA_PREFIX})
 endif()
 
+option(WITH_MARRAY ON)
+if(WITH_MARRAY)
+set(MARRAY_INCLUDE_DIR ${CMAKE_PREFIX_PATH} CACHE PATH "include")
+    add_definitions(-DWITH_MARRAY)
+    include_directories(${MARRAY_INCLUDE_DIR})
+endif()
+
 find_package(Boost REQUIRED COMPONENTS system filesystem)
 option(WITH_ZLIB ON)
 if(WITH_ZLIB)
@@ -33,3 +40,7 @@ target_link_libraries(test_cpp LINK_PUBLIC ${TEST_LIBS} ${COMPRESSION_LIBRARIES}
 
 add_executable(test_c main.c z5wrapper.cc)
 target_link_libraries(test_c LINK_PUBLIC ${TEST_LIBS} ${COMPRESSION_LIBRARIES})
+
+
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/z5wrapper.h"
+  DESTINATION "${CMAKE_INSTALL_PREFIX}/include")
