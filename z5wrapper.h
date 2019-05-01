@@ -7,15 +7,13 @@
 #include <stddef.h>
 #ifdef __cplusplus
 #include "z5/multiarray/xtensor_access.hxx"
-    extern "C" {
-#endif
-         typedef struct xarray cxarray;
-#ifdef __cplusplus
-    }
 #endif
 
 #ifdef __cplusplus
 #include "z5/dataset_factory.hxx"
+#include "z5/groups.hxx"
+#include "z5/compression/zlib_compressor.hxx"
+#include "z5/types/types.hxx"
 #endif
 
 #ifdef __cplusplus
@@ -23,13 +21,12 @@ namespace z5 {
     extern "C" {
 #endif
 
-        typedef struct Dataset Dataset;
+        void z5CreateGroup(char* path);
+        void z5CreateFloatDataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level);
 
-        Dataset *z5CreateFloatDataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks);
+        int z5WriteFloatSubarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset);
 
-        int z5WriteFloatSubarray(void *ds, float *array, unsigned int ndim, size_t *shape, size_t *offset);
-
-        int z5ReadFloatSubarray(void *ds, float *array,  unsigned int ndim, size_t *shape,size_t *offset);
+        int z5ReadFloatSubarray(char *path, float *array,  unsigned int ndim, size_t *shape,size_t *offset);
 
 #ifdef __cplusplus
     }

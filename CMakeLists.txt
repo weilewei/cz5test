@@ -18,12 +18,18 @@ if(DEFINED ENV{CONDA_PREFIX})
 endif()
 
 find_package(Boost REQUIRED COMPONENTS system filesystem)
-
+option(WITH_ZLIB ON)
+if(WITH_ZLIB)
+    find_package(ZLIB REQUIRED)
+    include_directories(ZLIB_INCLUDE_DIRS)
+    add_definitions(-DWITH_ZLIB)
+    SET(COMPRESSION_LIBRARIES "${COMPRESSION_LIBRARIES};${ZLIB_LIBRARIES}")
+endif()
 SET(TEST_LIBS
     ${Boost_FILESYSTEM_LIBRARY}    
     ${Boost_SYSTEM_LIBRARY})
 add_executable(test_cpp main.cpp)
-target_link_libraries(test_cpp LINK_PUBLIC ${TEST_LIBS})
+target_link_libraries(test_cpp LINK_PUBLIC ${TEST_LIBS} ${COMPRESSION_LIBRARIES})
 
 add_executable(test_c main.c z5wrapper.cc)
-target_link_libraries(test_c LINK_PUBLIC ${TEST_LIBS})
+target_link_libraries(test_c LINK_PUBLIC ${TEST_LIBS} ${COMPRESSION_LIBRARIES})
