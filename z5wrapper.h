@@ -27,9 +27,9 @@ namespace z5 {
 
         Dataset *z5CreateFloatDataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks);
 
-        int z5WriteFloatSubarray(void *ds, float *array, unsigned int ndim, size_t *shape, size_t *offset);
+        void z5WriteFloatSubarray(void *ds, float *array, unsigned int ndim, size_t *shape, size_t *offset);
 
-        int z5ReadFloatSubarray(void *ds, float *array,  unsigned int ndim, size_t *shape,size_t *offset);
+        void z5ReadFloatSubarray(void *ds, float *array, unsigned int ndim, size_t *shape, size_t *offset);
 
 #ifdef __cplusplus
     }
