@@ -35,7 +35,7 @@ namespace z5 {
     }
 
 
-    int z5WriteFloatSubarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset) {
+    void z5WriteFloatSubarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset) {
         std::string path_s(path);
         auto ds =openDataset(path_s);
         size_t size = 1;
@@ -47,7 +47,7 @@ namespace z5 {
         multiarray::writeSubarray<float>(ds,adp_array,offset_v.begin());
     }
 
-    int z5ReadFloatSubarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset) {
+    void z5ReadFloatSubarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset) {
         std::string path_s(path);
         auto ds = openDataset(path_s);
         using vec_type = std::vector<float>;
@@ -60,7 +60,6 @@ namespace z5 {
         std::vector<size_t> offset_v(offset,offset + ndim);
         auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
         multiarray::readSubarray<float>(ds,adp_array,offset_v.begin()); 
-
     }
 }
 
