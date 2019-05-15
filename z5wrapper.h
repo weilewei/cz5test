@@ -22,12 +22,22 @@ namespace z5 {
 #endif
 
         void z5CreateGroup(char* path);
+
         void z5CreateFloatDataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level);
 
         void z5WriteFloatSubarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset);
 
         void z5ReadFloatSubarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset);
 
+        void z5CreateInt64Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level);
+
+        void z5WriteInt64Subarray(char *path, long long int *array, unsigned int ndim, size_t *shape, size_t *offset);
+
+        void z5ReadInt64Subarray(char *path, long long int *array, unsigned int ndim, size_t *shape, size_t *offset);
+
+        size_t z5GetFileSize(char *path);
+
+        void z5Delete(char *path );
 #ifdef __cplusplus
     }
 }
