@@ -11,6 +11,7 @@
 
 #ifdef __cplusplus
 #include "z5/dataset_factory.hxx"
+#include "z5/file.hxx"
 #include "z5/groups.hxx"
 #include "z5/compression/zlib_compressor.hxx"
 #include "z5/types/types.hxx"
@@ -20,7 +21,8 @@
 namespace z5 {
     extern "C" {
 #endif
-
+	void z5CreateFile(char* path);
+	
         void z5CreateGroup(char* path);
 
         void z5CreateFloatDataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level);

@@ -10,6 +10,14 @@ namespace fs = boost::filesystem;
 namespace z5 {
     extern "C" {
 
+    void z5CreateFile(char* path)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::File cFile(path_s);
+        createFile(cFile, asZarr);
+    }
+
     void z5CreateGroup(char* path) {
         std::string path_s(path);
         bool asZarr = true;
