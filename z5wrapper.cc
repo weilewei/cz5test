@@ -212,7 +212,7 @@ namespace z5 {
         writeAttributes(cHandle, j);
     }
 
-    void z5writeAttributesusint(char *path, const char *name, const unsigned int *value)
+    void z5writeAttributesusint(char *path, const char *name, const unsigned short *value)
     {
         std::string path_s(path);
         bool asZarr = true;
@@ -244,6 +244,17 @@ namespace z5 {
         j[name_s] = (int64_t) *value;
         writeAttributes(cHandle, j);
     }
+
+    void z5writeAttributesuint(char *path, const char *name, const unsigned int *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+        std::string name_s(name);
+        j[name_s] = (int64_t) *value;
+        writeAttributes(cHandle, j);
+    }	
 
     void z5Delete(char *path ){
         std::string path_s(path);

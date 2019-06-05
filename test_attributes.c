@@ -66,9 +66,24 @@ void my_create_dataset(char* arrayName)
     long int longval = 42;
     z5writeAttributeslong(arrayName, "long", &longval);
    
+    long long longlongval = 42;
+    z5writeAttributeslonglong(arrayName, "longlong", &longlongval);
+    
+    unsigned long long ulonglongval = 42;
+    z5writeAttributesulonglong(arrayName, "ulonglong", &ulonglongval);
+    
     unsigned short ushortval = 42;
     z5writeAttributesushort(arrayName, "unshort", &ushortval);
-    
+   
+    unsigned int uint = 42;
+    z5writeAttributesuint(arrayName, "uint", &uint);
+
+    unsigned short usint = 42;
+    z5writeAttributesusint(arrayName, "usint", &usint);
+ 
+    short shortint = 42;
+    z5writeAttributesshort(arrayName, "short", &shortint);
+ 
     printf("after assert\n");
 }
 

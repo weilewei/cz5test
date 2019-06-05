@@ -54,11 +54,13 @@ namespace z5 {
 
 	void z5writeAttributesushort(char *path, const char *name, const unsigned short *value);
 
-	void z5writeAttributesusint(char *path, const char *name, const unsigned int *value);
+	void z5writeAttributesusint(char *path, const char *name, const unsigned short int *value);
 
 	void z5writeAttributeslonglong(char *path, const char *name, const long long *value);
 
 	void z5writeAttributesulonglong(char *path, const char *name, const unsigned long long *value);
+ 
+	void z5writeAttributesuint(char *path, const char *name, const unsigned int *value);
  
 	void z5Delete(char *path );
 #ifdef __cplusplus
