@@ -13,6 +13,7 @@
 #include "z5/dataset_factory.hxx"
 #include "z5/file.hxx"
 #include "z5/groups.hxx"
+#include "z5/attributes.hxx"
 #include "z5/compression/zlib_compressor.hxx"
 #include "z5/types/types.hxx"
 #endif
@@ -39,7 +40,27 @@ namespace z5 {
 
         size_t z5GetFileSize(char *path);
 
-        void z5Delete(char *path );
+	void z5writeAttributesString(char *path, const char *name, const char *value);
+
+	void z5writeAttributesshort(char *path, const char *name, const short *value);
+
+	void z5writeAttributesint(char *path, const char *name, const int *value);
+	
+	void z5writeAttributeslong(char *path, const char *name, const long *value);
+
+	void z5writeAttributesfloat(char *path, const char *name, const float *value); 
+	
+	void z5writeAttributesdouble(char *path, const char *name, const double *value);
+
+	void z5writeAttributesushort(char *path, const char *name, const unsigned short *value);
+
+	void z5writeAttributesusint(char *path, const char *name, const unsigned int *value);
+
+	void z5writeAttributeslonglong(char *path, const char *name, const long long *value);
+
+	void z5writeAttributesulonglong(char *path, const char *name, const unsigned long long *value);
+ 
+	void z5Delete(char *path );
 #ifdef __cplusplus
     }
 }

@@ -2,6 +2,7 @@
 // Created by Kevin Paul on 2019-04-24.
 //
 #include <string>
+#include <stdint.h>
 #include <vector>
 #include <iostream>
 #include "z5wrapper.h"
@@ -132,6 +133,118 @@ namespace z5 {
 	file.close();
         return fileSize;
     }
+
+    void z5writeAttributesString(char *path, const char *name, const char *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+	nlohmann::json j;
+	std::string name_s(name);
+	std::string value_s(value);
+	j[name_s] = value_s;
+	writeAttributes(cHandle, j);	
+    }
+	
+    void z5writeAttributesshort(char *path, const char *name, const short *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+        std::string name_s(name);
+        j[name_s] = (int64_t) *value;
+        writeAttributes(cHandle, j);
+    }
+ 
+    void z5writeAttributesint(char *path, const char *name, const int *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+        std::string name_s(name);
+        j[name_s] = (int64_t) *value;
+        writeAttributes(cHandle, j);
+    }
+
+    void z5writeAttributeslong(char *path, const char *name, const long *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+        std::string name_s(name);
+        j[name_s] = (int64_t) *value;
+        writeAttributes(cHandle, j);
+    }
+
+    void z5writeAttributesfloat(char *path, const char *name, const float *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+        std::string name_s(name);
+        j[name_s] = (double) *value;
+        writeAttributes(cHandle, j);
+    }
+
+    void z5writeAttributesdouble(char *path, const char *name, const double *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+        std::string name_s(name);
+        j[name_s] = *value;
+        writeAttributes(cHandle, j);
+    }
+
+    void z5writeAttributesushort(char *path, const char *name, const unsigned short *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+        std::string name_s(name);
+        j[name_s] = (int64_t) *value;
+        writeAttributes(cHandle, j);
+    }
+
+    void z5writeAttributesusint(char *path, const char *name, const unsigned int *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+        std::string name_s(name);
+        j[name_s] = (int64_t) *value;
+        writeAttributes(cHandle, j);
+    }
+
+    void z5writeAttributeslonglong(char *path, const char *name, const long long *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+        std::string name_s(name);
+        j[name_s] = (int64_t) *value;
+        writeAttributes(cHandle, j);
+    }
+
+    void z5writeAttributesulonglong(char *path, const char *name, const unsigned long long *value)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+        std::string name_s(name);
+        j[name_s] = (int64_t) *value;
+        writeAttributes(cHandle, j);
+    }
+
     void z5Delete(char *path ){
         std::string path_s(path);
         fs::path filename(path_s);
