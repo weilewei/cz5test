@@ -83,7 +83,14 @@ void my_create_dataset(char* arrayName)
  
     short shortint = 42;
     z5writeAttributesshort(arrayName, "short", &shortint);
- 
+
+    // testing read all attributes
+    z5readAttributes(arrayName);
+    
+    // testing read attributes by providing keys
+    char *keysinput[2] = {"uint", "double"};
+    z5readAttributesWithKeys(arrayName, keysinput, 2); 
+    
     printf("after assert\n");
 }
 

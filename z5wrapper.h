@@ -40,6 +40,8 @@ namespace z5 {
 
         size_t z5GetFileSize(char *path);
 
+	void z5Delete(char *path );
+
 	void z5writeAttributesString(char *path, const char *name, const char *value);
 
 	void z5writeAttributesshort(char *path, const char *name, const short *value);
@@ -61,8 +63,12 @@ namespace z5 {
 	void z5writeAttributesulonglong(char *path, const char *name, const unsigned long long *value);
  
 	void z5writeAttributesuint(char *path, const char *name, const unsigned int *value);
- 
-	void z5Delete(char *path );
+
+	// read attributes //
+
+	void z5readAttributesWithKeys(char *path, char *keys[], int keys_sz); 
+	
+	void z5readAttributes(char *path); 
 #ifdef __cplusplus
     }
 }

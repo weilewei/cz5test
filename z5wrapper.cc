@@ -261,7 +261,43 @@ namespace z5 {
         fs::path filename(path_s);
         fs::remove_all(filename);
     }
+
+    // read attributes //
+    void z5readAttributesWithKeys(char *path, char *keys[], int keys_sz)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+	std::vector<std::string> keys_s;
+	for (size_t i = 0; i < keys_sz; i++)
+	{
+		std::string keys_tmp(keys[i]);
+		keys_s.push_back(keys_tmp);
+	}
+	readAttributes(cHandle, keys_s, j);
+#ifdef _JASON_OUTPUT_	
+	for (auto it = j.begin(); it != j.end(); ++it)
+	{
+    		std::cout << "key: " << it.key() << ", value:" << it.value() << '\n';
+	}
+#endif
+    }
       
+    void z5readAttributes(char *path)
+    {
+        std::string path_s(path);
+        bool asZarr = true;
+        handle::Handle cHandle(path_s);
+        nlohmann::json j;
+	readAttributes(cHandle, j);
+#ifdef _JASON_OUTPUT_	
+	for (auto it = j.begin(); it != j.end(); ++it)
+	{
+    		std::cout << "key: " << it.key() << ", value:" << it.value() << '\n';
+	}
+#endif	
+    }
 }
 
 }
