@@ -34,7 +34,7 @@ int main() {
     char* arrayName = "test_c.z5";
     int cusezlib = 1;
     int level = 1;
-    z5CreateFloatDataset(arrayName, ndim, shape, chunks, cusezlib, level);
+    z5CreateFloat32Dataset(arrayName, ndim, shape, chunks, cusezlib, level);
     z5WriteFloatSubarray(arrayName, data1, ndim, chunks, offset);
     z5ReadFloatSubarray(arrayName, rdata, ndim, chunks, offset); 
     for (int i = 0; i < chunks[0]; i++){

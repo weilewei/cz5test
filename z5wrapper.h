@@ -26,9 +26,13 @@ namespace z5 {
 	
         void z5CreateGroup(char* path);
 
-        void z5CreateFloatDataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level);
+        void z5CreateFloat32Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level);
+
+        void z5CreateFloat64Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level);
 
         void z5WriteFloatSubarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset);
+
+        void z5WriteFloat64Subarray(char *path, double *array, unsigned int ndim, size_t *shape, size_t *offset);
 
         void z5ReadFloatSubarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset);
 

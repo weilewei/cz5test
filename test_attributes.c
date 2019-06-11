@@ -11,6 +11,7 @@ void my_create_dataset(char* arrayName)
     float data1[10][10][10];
     float data2[10][10][10];
     float rdata[10][10][10];
+    double ddata[10][10][10];
     long long int idata1[10][10][10];
     long long int idata2[10][10][10];
     long long int irdata[10][10][10];
@@ -34,7 +35,9 @@ void my_create_dataset(char* arrayName)
     //char* arrayName = "test_c.z5";
     int cusezlib = 1;
     int level = 1;
-    z5CreateFloatDataset(arrayName, ndim, shape, chunks, cusezlib, level);
+    z5CreateFloat32Dataset(arrayName, ndim, shape, chunks, cusezlib, level);
+
+    
     z5WriteFloatSubarray(arrayName, data1, ndim, chunks, offset);
     z5ReadFloatSubarray(arrayName, rdata, ndim, chunks, offset);
     for (int i = 0; i < chunks[0]; i++){
@@ -92,6 +95,12 @@ void my_create_dataset(char* arrayName)
     z5readAttributesWithKeys(arrayName, keysinput, 2); 
     
     printf("after assert\n");
+
+    printf("testing different array type\n");
+    char* float64arrayName = "new_file/group1/float64variables";
+    z5CreateFloat64Dataset(float64arrayName, ndim, shape, chunks, cusezlib, level);
+
+    z5WriteFloat64Subarray(float64arrayName, ddata, ndim, chunks, offset);
 }
 
 void test_create_file()
