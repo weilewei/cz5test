@@ -88,7 +88,7 @@ namespace z5 {
     //std::cout<<"long long int "<<typeid(idata1).name()<<" "<<sizeof(long long int)<<std::endl;
 }
 
-    void z5WriteFloatSubarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset) {
+    void z5WriteFloat32Subarray(char *path, float *array, unsigned int ndim, size_t *shape, size_t *offset) {
         std::string path_s(path);
         auto ds =openDataset(path_s);
         size_t size = 1;

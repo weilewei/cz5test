@@ -38,7 +38,7 @@ void my_create_dataset(char* arrayName)
     z5CreateFloat32Dataset(arrayName, ndim, shape, chunks, cusezlib, level);
 
     
-    z5WriteFloatSubarray(arrayName, data1, ndim, chunks, offset);
+    z5WriteFloat32Subarray(arrayName, data1, ndim, chunks, offset);
     z5ReadFloatSubarray(arrayName, rdata, ndim, chunks, offset);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
@@ -46,7 +46,7 @@ void my_create_dataset(char* arrayName)
                 assert(data1[i][j][k] == rdata[i][j][k]);
         printf("data1 = %f\n",data1[i][0][0]);
     }
-    z5WriteFloatSubarray(arrayName, data2, ndim, chunks, offset2);
+    z5WriteFloat32Subarray(arrayName, data2, ndim, chunks, offset2);
     z5ReadFloatSubarray(arrayName, rdata, ndim, chunks, offset2);
     printf("after read float\n");
     for (int i = 0; i < chunks[0]; i++){
