@@ -309,6 +309,55 @@ namespace z5 {
         multiarray::readSubarray<int32_t>(ds,adp_array,offset_v.begin());
     }
 
+
+    void z5CreateUInt8Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level) {
+        std::string path_s(path);
+
+        std::vector<size_t> shape_v(shape, shape + ndim);
+        std::vector<size_t> chunks_v(chunks, chunks + ndim);
+        bool asZarr = true;
+
+        DatasetMetadata uint8Meta(types::Datatype::uint8,shape_v,chunks_v,asZarr);
+        if (cuseZlib) {
+            uint8Meta.compressor = types::zlib;
+            uint8Meta.compressionOptions["useZlib"] = true;
+            uint8Meta.compressionOptions["level"] = level;
+        }
+        handle::Dataset handle_(path_s);
+        handle_.createDir();
+        writeMetadata(handle_, uint8Meta);
+    }
+
+    void z5WriteUInt8Subarray(char *path, uint8_t *array, unsigned int ndim, size_t *shape, size_t *offset) {
+        std::string path_s(path);
+        auto ds =openDataset(path_s);
+        using vec_type = std::vector<uint8_t>;
+        size_t size = 1;
+        std::vector<std::size_t> shape_v(shape,shape + ndim);
+        for (std::vector<size_t>::const_iterator i = shape_v.begin(); i != shape_v.end(); ++i)
+            size=size*(*i);
+        using shape_type = std::vector<vec_type::size_type>;
+        shape_type s(shape,shape+ndim);
+        std::vector<size_t> offset_v(offset,offset + ndim);
+        auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
+        multiarray::writeSubarray<uint8_t>(ds,adp_array,offset_v.begin());
+    }
+
+    void z5ReadUInt8Subarray(char *path, uint8_t *array, unsigned int ndim, size_t *shape, size_t *offset) {
+        std::string path_s(path);
+        auto ds = openDataset(path_s);
+        using vec_type = std::vector<uint8_t>;
+        size_t size = 1;
+        std::vector<std::size_t> shape_v(shape,shape + ndim);
+        for (std::vector<size_t>::const_iterator i = shape_v.begin(); i != shape_v.end(); ++i)
+            size*=(*i);
+        using shape_type = std::vector<vec_type::size_type>;
+        shape_type s(shape,shape+ndim);
+        std::vector<size_t> offset_v(offset,offset + ndim);
+        auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
+        multiarray::readSubarray<uint8_t>(ds,adp_array,offset_v.begin());
+    }
+
     size_t z5GetFileSize(char *path){
         std::string path_s(path);
 	fs::ifstream file(path_s, std::ios::binary);
