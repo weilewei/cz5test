@@ -41,6 +41,11 @@ namespace z5 {
         void z5WriteInt8Subarray(char *path, int8_t *array, unsigned int ndim, size_t *shape, size_t *offset);
         void z5ReadInt8Subarray(char *path, int8_t *array, unsigned int ndim, size_t *shape, size_t *offset);
 
+        // int16_t
+        void z5CreateInt16Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level);
+        void z5WriteInt16Subarray(char *path, int16_t *array, unsigned int ndim, size_t *shape, size_t *offset);
+        void z5ReadInt16Subarray(char *path, int16_t *array, unsigned int ndim, size_t *shape, size_t *offset);
+
         // int64
         void z5CreateInt64Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level);
         void z5WriteInt64Subarray(char *path, long long int *array, unsigned int ndim, size_t *shape, size_t *offset);

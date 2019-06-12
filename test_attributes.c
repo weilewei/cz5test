@@ -18,6 +18,8 @@ void my_create_dataset(char* arrayName)
     long long int irdata[10][10][10];
     int8_t i8data[10][10][10];
     int8_t ri8data[10][10][10];
+    int16_t i16data[10][10][10];
+    int16_t ri16data[10][10][10];
     unsigned int ndim = 3;
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++){
@@ -27,6 +29,7 @@ void my_create_dataset(char* arrayName)
                 data2[i][j][k]=rand()%1000+1;
                 idata2[i][j][k]=rand()%1000+1;
                 i8data[i][j][k]=rand()%1000+1;
+                i16data[i][j][k]=rand()%1000+1;
             }
         }
     }
@@ -106,6 +109,7 @@ void my_create_dataset(char* arrayName)
     }
     printf("===successfully read Float64Dataset===\n");
 
+
     char* int8arrayName = "new_file/group1/int8variables";
     z5CreateInt8Dataset(int8arrayName, ndim, shape, chunks, cusezlib, level);
     printf("===successfully creat Int8Dataset===\n");
@@ -118,6 +122,19 @@ void my_create_dataset(char* arrayName)
                 assert(i8data[i][j][k] == ri8data[i][j][k]);
     }
     printf("===successfully read Int8Dataset===\n");
+
+    char* int16arrayName = "new_file/group1/int16variables";
+    z5CreateInt16Dataset(int16arrayName, ndim, shape, chunks, cusezlib, level);
+    printf("===successfully creat Int16Dataset===\n");
+    z5WriteInt16Subarray(int16arrayName, i16data, ndim, chunks, offset);
+    printf("===successfully write Int16Dataset===\n");
+    z5ReadInt16Subarray(int16arrayName, ri16data, ndim, chunks, offset);
+    for (int i = 0; i < chunks[0]; i++){
+        for (int j = 0; j < chunks[1]; j++)
+            for (int k = 0; k<chunks[2]; k++)
+                assert(i16data[i][j][k] == ri16data[i][j][k]);
+    }
+    printf("===successfully read Int16Dataset===\n");
 
 }
 
