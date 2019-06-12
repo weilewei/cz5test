@@ -20,6 +20,8 @@ void my_create_dataset(char* arrayName)
     int8_t ri8data[10][10][10];
     int16_t i16data[10][10][10];
     int16_t ri16data[10][10][10];
+    int32_t i32data[10][10][10];
+    int32_t ri32data[10][10][10];
     unsigned int ndim = 3;
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++){
@@ -30,6 +32,7 @@ void my_create_dataset(char* arrayName)
                 idata2[i][j][k]=rand()%1000+1;
                 i8data[i][j][k]=rand()%1000+1;
                 i16data[i][j][k]=rand()%1000+1;
+                i32data[10][10][10];
             }
         }
     }
@@ -135,6 +138,19 @@ void my_create_dataset(char* arrayName)
                 assert(i16data[i][j][k] == ri16data[i][j][k]);
     }
     printf("===successfully read Int16Dataset===\n");
+
+    char* int32arrayName = "new_file/group1/int32variables";
+    z5CreateInt32Dataset(int32arrayName, ndim, shape, chunks, cusezlib, level);
+    printf("===successfully creat Int32Dataset===\n");
+    z5WriteInt32Subarray(int32arrayName, i32data, ndim, chunks, offset);
+    printf("===successfully write Int32Dataset===\n");
+    z5ReadInt32Subarray(int32arrayName, ri32data, ndim, chunks, offset);
+    for (int i = 0; i < chunks[0]; i++){
+        for (int j = 0; j < chunks[1]; j++)
+            for (int k = 0; k<chunks[2]; k++)
+                assert(i32data[i][j][k] == ri32data[i][j][k]);
+    }
+    printf("===successfully read Int32Dataset===\n");
 
 }
 
