@@ -22,12 +22,16 @@ void my_create_dataset(char* arrayName)
     int16_t ri16data[10][10][10];
     int32_t i32data[10][10][10];
     int32_t ri32data[10][10][10];
+    int64_t i64data[10][10][10];
+    int64_t ri64data[10][10][10];
     uint8_t ui8data[10][10][10];
     uint8_t rui8data[10][10][10];
     uint16_t ui16data[10][10][10];
     uint16_t rui16data[10][10][10];
     uint32_t ui32data[10][10][10];
     uint32_t rui32data[10][10][10];
+    uint64_t ui64data[10][10][10];
+    uint64_t rui64data[10][10][10];
     unsigned int ndim = 3;
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++){
@@ -39,9 +43,11 @@ void my_create_dataset(char* arrayName)
                 i8data[i][j][k]=rand()%1000+1;
                 i16data[i][j][k]=rand()%1000+1;
                 i32data[i][j][k]=rand()%1000+1;
+                i64data[i][j][k]=rand()%1000+1;
                 ui8data[i][j][k]=rand()%1000+1;
                 ui16data[i][j][k]=rand()%1000+1;
                 ui32data[i][j][k]=rand()%1000+1;
+                ui64data[i][j][k]=rand()%1000+1;
             }
         }
     }
@@ -199,6 +205,19 @@ void my_create_dataset(char* arrayName)
                 assert(ui32data[i][j][k] == rui32data[i][j][k]);
     }
     printf("===successfully read UInt32Dataset===\n");
+
+    char* uint64arrayName = "new_file/group1/uint64variables";
+    z5CreateUInt64Dataset(uint64arrayName, ndim, shape, chunks, cusezlib, level);
+    printf("===successfully creat UInt64Dataset===\n");
+    z5WriteUInt64Subarray(uint64arrayName, ui64data, ndim, chunks, offset);
+    printf("===successfully write UInt64Dataset===\n");
+    z5ReadUInt64Subarray(uint64arrayName, rui64data, ndim, chunks, offset);
+    for (int i = 0; i < chunks[0]; i++){
+        for (int j = 0; j < chunks[1]; j++)
+            for (int k = 0; k<chunks[2]; k++)
+                assert(ui64data[i][j][k] == rui64data[i][j][k]);
+    }
+    printf("===successfully read UInt64Dataset===\n");
 
 }
 
