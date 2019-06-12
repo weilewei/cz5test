@@ -12,6 +12,7 @@ void my_create_dataset(char* arrayName)
     float data2[10][10][10];
     float rdata[10][10][10];
     double ddata[10][10][10];
+    double rddata[10][10][10];
     long long int idata1[10][10][10];
     long long int idata2[10][10][10];
     long long int irdata[10][10][10];
@@ -39,15 +40,15 @@ void my_create_dataset(char* arrayName)
 
     
     z5WriteFloat32Subarray(arrayName, data1, ndim, chunks, offset);
-    z5ReadFloatSubarray(arrayName, rdata, ndim, chunks, offset);
+    z5ReadFloat32Subarray(arrayName, rdata, ndim, chunks, offset);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
                 assert(data1[i][j][k] == rdata[i][j][k]);
-        printf("data1 = %f\n",data1[i][0][0]);
+//        printf("data1 = %f\n",data1[i][0][0]);
     }
     z5WriteFloat32Subarray(arrayName, data2, ndim, chunks, offset2);
-    z5ReadFloatSubarray(arrayName, rdata, ndim, chunks, offset2);
+    z5ReadFloat32Subarray(arrayName, rdata, ndim, chunks, offset2);
     printf("after read float\n");
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
@@ -96,11 +97,20 @@ void my_create_dataset(char* arrayName)
     
     printf("after assert\n");
 
-    printf("testing different array type\n");
+    printf("testing different array types\n");
+
     char* float64arrayName = "new_file/group1/float64variables";
     z5CreateFloat64Dataset(float64arrayName, ndim, shape, chunks, cusezlib, level);
-
+    printf("===successfully creat Float64Dataset===\n");
     z5WriteFloat64Subarray(float64arrayName, ddata, ndim, chunks, offset);
+    printf("===successfully write Float64Dataset===\n");
+    z5ReadFloat64Subarray(float64arrayName, rddata, ndim, chunks, offset);
+    for (int i = 0; i < chunks[0]; i++){
+        for (int j = 0; j < chunks[1]; j++)
+            for (int k = 0; k<chunks[2]; k++)
+                assert(ddata[i][j][k] == rddata[i][j][k]);
+    }
+    printf("===successfully read Float64Dataset===\n");
 }
 
 void test_create_file()

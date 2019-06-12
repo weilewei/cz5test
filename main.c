@@ -36,7 +36,7 @@ int main() {
     int level = 1;
     z5CreateFloat32Dataset(arrayName, ndim, shape, chunks, cusezlib, level);
     z5WriteFloat32Subarray(arrayName, data1, ndim, chunks, offset);
-    z5ReadFloatSubarray(arrayName, rdata, ndim, chunks, offset); 
+    z5ReadFloat32Subarray(arrayName, rdata, ndim, chunks, offset);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++) 
@@ -44,7 +44,7 @@ int main() {
         printf("data1 = %f\n",data1[i][0][0]);
     }
     z5WriteFloat32Subarray("test_c.z5", data2, ndim, chunks, offset2);
-    z5ReadFloatSubarray("test_c.z5", rdata, ndim, chunks, offset2); 
+    z5ReadFloat32Subarray("test_c.z5", rdata, ndim, chunks, offset2);
     printf("after read float\n");
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
