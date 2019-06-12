@@ -26,6 +26,8 @@ void my_create_dataset(char* arrayName)
     uint8_t rui8data[10][10][10];
     uint16_t ui16data[10][10][10];
     uint16_t rui16data[10][10][10];
+    uint32_t ui32data[10][10][10];
+    uint32_t rui32data[10][10][10];
     unsigned int ndim = 3;
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++){
@@ -39,6 +41,7 @@ void my_create_dataset(char* arrayName)
                 i32data[i][j][k]=rand()%1000+1;
                 ui8data[i][j][k]=rand()%1000+1;
                 ui16data[i][j][k]=rand()%1000+1;
+                ui32data[i][j][k]=rand()%1000+1;
             }
         }
     }
@@ -183,19 +186,19 @@ void my_create_dataset(char* arrayName)
                 assert(ui16data[i][j][k] == rui16data[i][j][k]);
     }
     printf("===successfully read UInt16Dataset===\n");
-//
-//    char* int32arrayName = "new_file/group1/int32variables";
-//    z5CreateInt32Dataset(int32arrayName, ndim, shape, chunks, cusezlib, level);
-//    printf("===successfully creat Int32Dataset===\n");
-//    z5WriteInt32Subarray(int32arrayName, i32data, ndim, chunks, offset);
-//    printf("===successfully write Int32Dataset===\n");
-//    z5ReadInt32Subarray(int32arrayName, ri32data, ndim, chunks, offset);
-//    for (int i = 0; i < chunks[0]; i++){
-//        for (int j = 0; j < chunks[1]; j++)
-//            for (int k = 0; k<chunks[2]; k++)
-//                assert(i32data[i][j][k] == ri32data[i][j][k]);
-//    }
-//    printf("===successfully read Int32Dataset===\n");
+
+    char* uint32arrayName = "new_file/group1/uint32variables";
+    z5CreateUInt32Dataset(uint32arrayName, ndim, shape, chunks, cusezlib, level);
+    printf("===successfully creat UInt32Dataset===\n");
+    z5WriteUInt32Subarray(uint32arrayName, ui32data, ndim, chunks, offset);
+    printf("===successfully write UInt32Dataset===\n");
+    z5ReadUInt32Subarray(uint32arrayName, rui32data, ndim, chunks, offset);
+    for (int i = 0; i < chunks[0]; i++){
+        for (int j = 0; j < chunks[1]; j++)
+            for (int k = 0; k<chunks[2]; k++)
+                assert(ui32data[i][j][k] == rui32data[i][j][k]);
+    }
+    printf("===successfully read UInt32Dataset===\n");
 
 }
 

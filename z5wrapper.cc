@@ -117,54 +117,6 @@ namespace z5 {
         multiarray::readSubarray<double>(ds,adp_array,offset_v.begin());
     }
 
-    void z5CreateInt64Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level) {
-        std::string path_s(path);
-
-        std::vector<size_t> shape_v(shape, shape + ndim);
-        std::vector<size_t> chunks_v(chunks, chunks + ndim);
-        bool asZarr = true;
-
-        DatasetMetadata int64Meta(types::Datatype::int64,shape_v,chunks_v,asZarr);
-        if (cuseZlib) {
-            int64Meta.compressor = types::zlib;
-            int64Meta.compressionOptions["useZlib"] = true;
-            int64Meta.compressionOptions["level"] = level;
-        }
-        handle::Dataset handle_(path_s);
-        handle_.createDir();
-        writeMetadata(handle_, int64Meta);
-    }
-
-    void z5WriteInt64Subarray(char *path, long long int *array, unsigned int ndim, size_t *shape, size_t *offset) {
-        std::string path_s(path);
-        auto ds =openDataset(path_s);
-        using vec_type = std::vector<long int>;
-        size_t size = 1;
-        std::vector<std::size_t> shape_v(shape,shape + ndim); 
-        for (std::vector<size_t>::const_iterator i = shape_v.begin(); i != shape_v.end(); ++i)
-            size=size*(*i);
-        using shape_type = std::vector<vec_type::size_type>;
-        shape_type s(shape,shape+ndim);
-        std::vector<size_t> offset_v(offset,offset + ndim);
-        auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
-        multiarray::writeSubarray<long int>(ds,adp_array,offset_v.begin());
-    }
-
-    void z5ReadInt64Subarray(char *path, long long int *array, unsigned int ndim, size_t *shape, size_t *offset) {
-        std::string path_s(path);
-        auto ds = openDataset(path_s);
-        using vec_type = std::vector<long int>;
-        size_t size = 1;
-        std::vector<std::size_t> shape_v(shape,shape + ndim); 
-        for (std::vector<size_t>::const_iterator i = shape_v.begin(); i != shape_v.end(); ++i)
-            size*=(*i);
-        using shape_type = std::vector<vec_type::size_type>;
-        shape_type s(shape,shape+ndim);
-        std::vector<size_t> offset_v(offset,offset + ndim);
-        auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
-        multiarray::readSubarray<long int>(ds,adp_array,offset_v.begin()); 
-    }
-
     void z5CreateInt8Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level) {
         std::string path_s(path);
 
@@ -309,6 +261,53 @@ namespace z5 {
         multiarray::readSubarray<int32_t>(ds,adp_array,offset_v.begin());
     }
 
+    void z5CreateInt64Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level) {
+        std::string path_s(path);
+
+        std::vector<size_t> shape_v(shape, shape + ndim);
+        std::vector<size_t> chunks_v(chunks, chunks + ndim);
+        bool asZarr = true;
+
+        DatasetMetadata int64Meta(types::Datatype::int64,shape_v,chunks_v,asZarr);
+        if (cuseZlib) {
+            int64Meta.compressor = types::zlib;
+            int64Meta.compressionOptions["useZlib"] = true;
+            int64Meta.compressionOptions["level"] = level;
+        }
+        handle::Dataset handle_(path_s);
+        handle_.createDir();
+        writeMetadata(handle_, int64Meta);
+    }
+
+    void z5WriteInt64Subarray(char *path, long long int *array, unsigned int ndim, size_t *shape, size_t *offset) {
+        std::string path_s(path);
+        auto ds =openDataset(path_s);
+        using vec_type = std::vector<long int>;
+        size_t size = 1;
+        std::vector<std::size_t> shape_v(shape,shape + ndim);
+        for (std::vector<size_t>::const_iterator i = shape_v.begin(); i != shape_v.end(); ++i)
+            size=size*(*i);
+        using shape_type = std::vector<vec_type::size_type>;
+        shape_type s(shape,shape+ndim);
+        std::vector<size_t> offset_v(offset,offset + ndim);
+        auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
+        multiarray::writeSubarray<long int>(ds,adp_array,offset_v.begin());
+    }
+
+    void z5ReadInt64Subarray(char *path, long long int *array, unsigned int ndim, size_t *shape, size_t *offset) {
+        std::string path_s(path);
+        auto ds = openDataset(path_s);
+        using vec_type = std::vector<long int>;
+        size_t size = 1;
+        std::vector<std::size_t> shape_v(shape,shape + ndim);
+        for (std::vector<size_t>::const_iterator i = shape_v.begin(); i != shape_v.end(); ++i)
+            size*=(*i);
+        using shape_type = std::vector<vec_type::size_type>;
+        shape_type s(shape,shape+ndim);
+        std::vector<size_t> offset_v(offset,offset + ndim);
+        auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
+        multiarray::readSubarray<long int>(ds,adp_array,offset_v.begin());
+    }
 
     void z5CreateUInt8Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level) {
         std::string path_s(path);
@@ -404,6 +403,54 @@ namespace z5 {
         std::vector<size_t> offset_v(offset,offset + ndim);
         auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
         multiarray::readSubarray<uint16_t>(ds,adp_array,offset_v.begin());
+    }
+
+    void z5CreateUInt32Dataset(char *path, unsigned int ndim, size_t *shape, size_t *chunks, int cuseZlib, int level) {
+        std::string path_s(path);
+
+        std::vector<size_t> shape_v(shape, shape + ndim);
+        std::vector<size_t> chunks_v(chunks, chunks + ndim);
+        bool asZarr = true;
+
+        DatasetMetadata uint32Meta(types::Datatype::uint32,shape_v,chunks_v,asZarr);
+        if (cuseZlib) {
+            uint32Meta.compressor = types::zlib;
+            uint32Meta.compressionOptions["useZlib"] = true;
+            uint32Meta.compressionOptions["level"] = level;
+        }
+        handle::Dataset handle_(path_s);
+        handle_.createDir();
+        writeMetadata(handle_, uint32Meta);
+    }
+
+    void z5WriteUInt32Subarray(char *path, uint32_t *array, unsigned int ndim, size_t *shape, size_t *offset) {
+        std::string path_s(path);
+        auto ds =openDataset(path_s);
+        using vec_type = std::vector<uint32_t>;
+        size_t size = 1;
+        std::vector<std::size_t> shape_v(shape,shape + ndim);
+        for (std::vector<size_t>::const_iterator i = shape_v.begin(); i != shape_v.end(); ++i)
+            size=size*(*i);
+        using shape_type = std::vector<vec_type::size_type>;
+        shape_type s(shape,shape+ndim);
+        std::vector<size_t> offset_v(offset,offset + ndim);
+        auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
+        multiarray::writeSubarray<uint32_t>(ds,adp_array,offset_v.begin());
+    }
+
+    void z5ReadUInt32Subarray(char *path, uint32_t *array, unsigned int ndim, size_t *shape, size_t *offset) {
+        std::string path_s(path);
+        auto ds = openDataset(path_s);
+        using vec_type = std::vector<uint32_t>;
+        size_t size = 1;
+        std::vector<std::size_t> shape_v(shape,shape + ndim);
+        for (std::vector<size_t>::const_iterator i = shape_v.begin(); i != shape_v.end(); ++i)
+            size*=(*i);
+        using shape_type = std::vector<vec_type::size_type>;
+        shape_type s(shape,shape+ndim);
+        std::vector<size_t> offset_v(offset,offset + ndim);
+        auto adp_array=xt::adapt(array,size,xt::no_ownership(),s);
+        multiarray::readSubarray<uint32_t>(ds,adp_array,offset_v.begin());
     }
 
     size_t z5GetFileSize(char *path){
