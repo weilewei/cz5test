@@ -39,8 +39,8 @@ int main() {
     z5ReadFloat32Subarray(arrayName, rdata, ndim, chunks, offset);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
-            for (int k = 0; k<chunks[2]; k++) 
-                assert(data1[i][j][k] == rdata[i][j][k]); 
+            for (int k = 0; k<chunks[2]; k++)
+                assert(data1[i][j][k] == rdata[i][j][k]);
         printf("data1 = %f\n",data1[i][0][0]);
     }
     z5WriteFloat32Subarray("test_c.z5", data2, ndim, chunks, offset2);
@@ -48,8 +48,8 @@ int main() {
     printf("after read float\n");
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
-            for (int k = 0; k<chunks[2]; k++) 
-                assert(data2[i][j][k] == rdata[i][j][k]); 
+            for (int k = 0; k<chunks[2]; k++)
+                assert(data2[i][j][k] == rdata[i][j][k]);
         printf("data2 = %f\n",data2[i][0][0]);
     }
     printf("after assert\n");
@@ -57,20 +57,20 @@ int main() {
     char* iarrayName = "test_c_int64.z5";
     z5CreateInt64Dataset(iarrayName, ndim, shape, chunks, cusezlib, level);
     z5WriteInt64Subarray(iarrayName, idata1, ndim, chunks, offset);
-    z5ReadInt64Subarray(iarrayName, irdata, ndim, chunks, offset); 
+    z5ReadInt64Subarray(iarrayName, irdata, ndim, chunks, offset);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
-            for (int k = 0; k<chunks[2]; k++) 
-                assert(idata1[i][j][k] == irdata[i][j][k]); 
+            for (int k = 0; k<chunks[2]; k++)
+                assert(idata1[i][j][k] == irdata[i][j][k]);
         printf("idata1 = %lu\n",idata1[i][0][0]);
     }
     z5WriteInt64Subarray(iarrayName, idata2, ndim, chunks, offset2);
-    z5ReadInt64Subarray(iarrayName, irdata, ndim, chunks, offset2); 
+    z5ReadInt64Subarray(iarrayName, irdata, ndim, chunks, offset2);
     printf("after read float\n");
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
-            for (int k = 0; k<chunks[2]; k++) 
-                assert(idata2[i][j][k] == irdata[i][j][k]); 
+            for (int k = 0; k<chunks[2]; k++)
+                assert(idata2[i][j][k] == irdata[i][j][k]);
         printf("idata2 = %lu\n",idata2[i][0][0]);
     }
     printf("after assert\n");

@@ -71,44 +71,44 @@ void my_create_dataset(char* arrayName)
         printf("data2 = %f\n",data2[i][0][0]);
     }
     z5writeAttributesString(arrayName, "time", "noon");
-    
+
     float floatval = 42.0;
     z5writeAttributesfloat(arrayName, "float", &floatval);
-    
+
     double doubleval = 42.0;
     z5writeAttributesdouble(arrayName, "double", &doubleval);
-    
+
     int intval = 42;
     z5writeAttributesint(arrayName, "int", &intval);
-    
+
     long int longval = 42;
     z5writeAttributeslong(arrayName, "long", &longval);
-   
+
     long long longlongval = 42;
     z5writeAttributeslonglong(arrayName, "longlong", &longlongval);
-    
+
     unsigned long long ulonglongval = 42;
     z5writeAttributesulonglong(arrayName, "ulonglong", &ulonglongval);
-    
+
     unsigned short ushortval = 42;
     z5writeAttributesushort(arrayName, "unshort", &ushortval);
-   
+
     unsigned int uint = 42;
     z5writeAttributesuint(arrayName, "uint", &uint);
 
     unsigned short usint = 42;
     z5writeAttributesusint(arrayName, "usint", &usint);
- 
+
     short shortint = 42;
     z5writeAttributesshort(arrayName, "short", &shortint);
 
     // testing read all attributes
     z5readAttributes(arrayName);
-    
+
     // testing read attributes by providing keys
     char *keysinput[2] = {"uint", "double"};
-    z5readAttributesWithKeys(arrayName, keysinput, 2); 
-    
+    z5readAttributesWithKeys(arrayName, keysinput, 2);
+
     printf("after assert\n");
 
     printf("testing different array types\n");
