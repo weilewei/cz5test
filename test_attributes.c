@@ -6,8 +6,8 @@ void my_create_dataset(char* arrayName)
 {
     size_t shape[] = {20, 20, 20};
     size_t chunks[] = {10, 10, 10};
-    size_t offset[] = {0, 0, 0};
-    size_t offset2[] = {10, 10, 10};
+    size_t start[] = {0, 0, 0};
+    size_t start2[] = {10, 10, 10};
     float data1[10][10][10];
     float data2[10][10][10];
     float rdata[10][10][10];
@@ -54,15 +54,15 @@ void my_create_dataset(char* arrayName)
     int cusezlib = 1;
     int level = 1;
     z5CreateFloat32Dataset(arrayName, ndim, shape, chunks, cusezlib, level);
-    z5WriteFloat32Subarray(arrayName, data1, ndim, chunks, offset);
-    z5ReadFloat32Subarray(arrayName, rdata, ndim, chunks, offset);
+    z5WriteFloat32Subarray(arrayName, data1, ndim, chunks, start);
+    z5ReadFloat32Subarray(arrayName, rdata, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
                 assert(data1[i][j][k] == rdata[i][j][k]);
     }
-    z5WriteFloat32Subarray(arrayName, data2, ndim, chunks, offset2);
-    z5ReadFloat32Subarray(arrayName, rdata, ndim, chunks, offset2);
+    z5WriteFloat32Subarray(arrayName, data2, ndim, chunks, start2);
+    z5ReadFloat32Subarray(arrayName, rdata, ndim, chunks, start2);
     printf("after read float\n");
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
@@ -117,9 +117,9 @@ void my_create_dataset(char* arrayName)
     char* float64arrayName = "new_file/group1/float64variables";
     z5CreateFloat64Dataset(float64arrayName, ndim, shape, chunks, cusezlib, level);
     printf("===successfully creat Float64Dataset===\n");
-    z5WriteFloat64Subarray(float64arrayName, ddata, ndim, chunks, offset);
+    z5WriteFloat64Subarray(float64arrayName, ddata, ndim, chunks, start);
     printf("===successfully write Float64Dataset===\n");
-    z5ReadFloat64Subarray(float64arrayName, rddata, ndim, chunks, offset);
+    z5ReadFloat64Subarray(float64arrayName, rddata, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
@@ -131,9 +131,9 @@ void my_create_dataset(char* arrayName)
     char* int8arrayName = "new_file/group1/int8variables";
     z5CreateInt8Dataset(int8arrayName, ndim, shape, chunks, cusezlib, level);
     printf("===successfully creat Int8Dataset===\n");
-    z5WriteInt8Subarray(int8arrayName, i8data, ndim, chunks, offset);
+    z5WriteInt8Subarray(int8arrayName, i8data, ndim, chunks, start);
     printf("===successfully write Int8Dataset===\n");
-    z5ReadInt8Subarray(int8arrayName, ri8data, ndim, chunks, offset);
+    z5ReadInt8Subarray(int8arrayName, ri8data, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
@@ -144,9 +144,9 @@ void my_create_dataset(char* arrayName)
     char* int16arrayName = "new_file/group1/int16variables";
     z5CreateInt16Dataset(int16arrayName, ndim, shape, chunks, cusezlib, level);
     printf("===successfully creat Int16Dataset===\n");
-    z5WriteInt16Subarray(int16arrayName, i16data, ndim, chunks, offset);
+    z5WriteInt16Subarray(int16arrayName, i16data, ndim, chunks, start);
     printf("===successfully write Int16Dataset===\n");
-    z5ReadInt16Subarray(int16arrayName, ri16data, ndim, chunks, offset);
+    z5ReadInt16Subarray(int16arrayName, ri16data, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
@@ -157,9 +157,9 @@ void my_create_dataset(char* arrayName)
     char* int32arrayName = "new_file/group1/int32variables";
     z5CreateInt32Dataset(int32arrayName, ndim, shape, chunks, cusezlib, level);
     printf("===successfully creat Int32Dataset===\n");
-    z5WriteInt32Subarray(int32arrayName, i32data, ndim, chunks, offset);
+    z5WriteInt32Subarray(int32arrayName, i32data, ndim, chunks, start);
     printf("===successfully write Int32Dataset===\n");
-    z5ReadInt32Subarray(int32arrayName, ri32data, ndim, chunks, offset);
+    z5ReadInt32Subarray(int32arrayName, ri32data, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
@@ -170,9 +170,9 @@ void my_create_dataset(char* arrayName)
     char* uint8arrayName = "new_file/group1/uint8variables";
     z5CreateUInt8Dataset(uint8arrayName, ndim, shape, chunks, cusezlib, level);
     printf("===successfully creat UInt8Dataset===\n");
-    z5WriteUInt8Subarray(uint8arrayName, ui8data, ndim, chunks, offset);
+    z5WriteUInt8Subarray(uint8arrayName, ui8data, ndim, chunks, start);
     printf("===successfully write UInt8Dataset===\n");
-    z5ReadUInt8Subarray(uint8arrayName, rui8data, ndim, chunks, offset);
+    z5ReadUInt8Subarray(uint8arrayName, rui8data, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
@@ -183,9 +183,9 @@ void my_create_dataset(char* arrayName)
     char* uint16arrayName = "new_file/group1/uint16variables";
     z5CreateUInt16Dataset(uint16arrayName, ndim, shape, chunks, cusezlib, level);
     printf("===successfully creat UInt16Dataset===\n");
-    z5WriteUInt16Subarray(uint16arrayName, ui16data, ndim, chunks, offset);
+    z5WriteUInt16Subarray(uint16arrayName, ui16data, ndim, chunks, start);
     printf("===successfully write UInt16Dataset===\n");
-    z5ReadUInt16Subarray(uint16arrayName, rui16data, ndim, chunks, offset);
+    z5ReadUInt16Subarray(uint16arrayName, rui16data, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
@@ -196,9 +196,9 @@ void my_create_dataset(char* arrayName)
     char* uint32arrayName = "new_file/group1/uint32variables";
     z5CreateUInt32Dataset(uint32arrayName, ndim, shape, chunks, cusezlib, level);
     printf("===successfully creat UInt32Dataset===\n");
-    z5WriteUInt32Subarray(uint32arrayName, ui32data, ndim, chunks, offset);
+    z5WriteUInt32Subarray(uint32arrayName, ui32data, ndim, chunks, start);
     printf("===successfully write UInt32Dataset===\n");
-    z5ReadUInt32Subarray(uint32arrayName, rui32data, ndim, chunks, offset);
+    z5ReadUInt32Subarray(uint32arrayName, rui32data, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
@@ -209,9 +209,9 @@ void my_create_dataset(char* arrayName)
     char* uint64arrayName = "new_file/group1/uint64variables";
     z5CreateUInt64Dataset(uint64arrayName, ndim, shape, chunks, cusezlib, level);
     printf("===successfully creat UInt64Dataset===\n");
-    z5WriteUInt64Subarray(uint64arrayName, ui64data, ndim, chunks, offset);
+    z5WriteUInt64Subarray(uint64arrayName, ui64data, ndim, chunks, start);
     printf("===successfully write UInt64Dataset===\n");
-    z5ReadUInt64Subarray(uint64arrayName, rui64data, ndim, chunks, offset);
+    z5ReadUInt64Subarray(uint64arrayName, rui64data, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)

@@ -6,8 +6,8 @@ int main() {
 
     size_t shape[] = {20, 20, 20};
     size_t chunks[] = {10, 10, 10};
-    size_t offset[] = {0, 0, 0};
-    size_t offset2[] = {10, 10, 10};
+    size_t start[] = {0, 0, 0};
+    size_t start2[] = {10, 10, 10};
     float data1[10][10][10];
     float data2[10][10][10];
     float rdata[10][10][10];
@@ -35,16 +35,16 @@ int main() {
     int cusezlib = 1;
     int level = 1;
     z5CreateFloat32Dataset(arrayName, ndim, shape, chunks, cusezlib, level);
-    z5WriteFloat32Subarray(arrayName, data1, ndim, chunks, offset);
-    z5ReadFloat32Subarray(arrayName, rdata, ndim, chunks, offset);
+    z5WriteFloat32Subarray(arrayName, data1, ndim, chunks, start);
+    z5ReadFloat32Subarray(arrayName, rdata, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
                 assert(data1[i][j][k] == rdata[i][j][k]);
         printf("data1 = %f\n",data1[i][0][0]);
     }
-    z5WriteFloat32Subarray("test_c.z5", data2, ndim, chunks, offset2);
-    z5ReadFloat32Subarray("test_c.z5", rdata, ndim, chunks, offset2);
+    z5WriteFloat32Subarray("test_c.z5", data2, ndim, chunks, start2);
+    z5ReadFloat32Subarray("test_c.z5", rdata, ndim, chunks, start2);
     printf("after read float\n");
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
@@ -56,16 +56,16 @@ int main() {
 
     char* iarrayName = "test_c_int64.z5";
     z5CreateInt64Dataset(iarrayName, ndim, shape, chunks, cusezlib, level);
-    z5WriteInt64Subarray(iarrayName, idata1, ndim, chunks, offset);
-    z5ReadInt64Subarray(iarrayName, irdata, ndim, chunks, offset);
+    z5WriteInt64Subarray(iarrayName, idata1, ndim, chunks, start);
+    z5ReadInt64Subarray(iarrayName, irdata, ndim, chunks, start);
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
             for (int k = 0; k<chunks[2]; k++)
                 assert(idata1[i][j][k] == irdata[i][j][k]);
         printf("idata1 = %lu\n",idata1[i][0][0]);
     }
-    z5WriteInt64Subarray(iarrayName, idata2, ndim, chunks, offset2);
-    z5ReadInt64Subarray(iarrayName, irdata, ndim, chunks, offset2);
+    z5WriteInt64Subarray(iarrayName, idata2, ndim, chunks, start2);
+    z5ReadInt64Subarray(iarrayName, irdata, ndim, chunks, start2);
     printf("after read float\n");
     for (int i = 0; i < chunks[0]; i++){
         for (int j = 0; j < chunks[1]; j++)
