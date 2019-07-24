@@ -235,9 +235,26 @@ void test_create_file()
     
 }
 
+void test_read_var()
+{
+    size_t shape[] = {25, 200};
+    size_t count[] = {25, 200};
+    size_t start[] = {75, 0};
+    double rdata[25][200];
+    char* float64arrayName = "/glade/u/home/weile/dev/repos_pr/ParallelIO/bld/tests/cunit/pio_iosys_test_file0/variables/DOUBLE";
+    z5ReadFloat64Subarray(float64arrayName, rdata, 2, count, start);
+    for (int i = 0; i < 25; i++){
+        for (int j = 0; j < 200; j++)
+        {
+            printf("%f\t", rdata[i][j]);
+        }
+        printf("\n");
+    }
+}
 
 int main()
 {
-	test_create_file();
+//	test_create_file();
+    test_read_var();
 	return 0;
 }
